@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs/Observable";
 
 /*
   Generated class for the CategoriesProvider provider.
@@ -10,19 +11,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class CategoriesProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello CategoriesProvider Provider');
-  }
+  constructor(public http: HttpClient) { }
 
-  categories = [
-    {nomcategorie: 'Sainte-Lucie'},
-    {nomcategorie: 'Martinique'},
-    {nomcategorie: 'Caraibe'},
-    {nomcategorie: 'Evenements'}
-  ];
-
-  getCategories() {
-    return this.categories;
+  getCategories():Observable<any> {
+    return this.http.get( 'https://reservations.spotevasion.com/api/categories' )
   }
 
 }

@@ -1,0 +1,42 @@
+<!--
+  Generated template for the ConnexionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Connexion</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <div class="appLogo" *ngIf="appConfiguration">
+      <img (click)="openPage('home')" src="{{ appConfiguration.URL_HOME }}{{ appConfiguration.LOGO_SITE }}" alt="{{ appConfiguration.nom_site }}">
+    </div>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Mot de Passe</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div padding>
+    <button block ion-button color="dark">Connexion</button>
+  </div>
+
+</ion-content>

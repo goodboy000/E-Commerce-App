@@ -1,10 +1,15 @@
+// -- Chargement des Elements Angular / Ionic
 import { Component, ViewChild } from '@angular/core';
 import {MenuController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// -- Chargement des Pages
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import {ConnexionPage} from "../pages/connexion/connexion";
+
+// -- Chargement des Providers
 import {ConfigurationProvider} from "../providers/configuration/configuration";
 import {CategoriesProvider} from "../providers/categories/categories";
 
@@ -16,9 +21,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
-
-  appConfig : any;
+  appConfiguration : any;
   appCategories : any;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
@@ -27,18 +30,20 @@ export class MyApp {
 
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Connexion', component: ListPage },
-      { title: 'Inscription', component: ListPage },
-      { title: 'Contact', component: ListPage }
-    ];
-
     // -- Récupération de la configuration
-    this.appConfig = configurationProvider.getConfig();
+    configurationProvider.getConfiguration().subscribe(
+      configuration => {
+        this.appConfiguration = configuration;
+      }
+    );
 
     // -- Récupération de la liste des catégories
-    this.appCategories = categorieProvider.getCategories();
+    categorieProvider.getCategories().subscribe(
+      categories => {
+        this.appCategories = categories
+      }
+    );
+
   }
 
   initializeApp() {
@@ -54,6 +59,16 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.menuCtrl.close();
-    this.nav.setRoot(ListPage);
+
+    // console.log(page);
+
+    if(page == 'home') {
+      this.nav.setRoot(HomePage);
+    }
+
+    if(page === 'connexion') {
+      this.nav.setRoot(ConnexionPage,{'configuration':this.appConfiguration});
+    }
+
   }
 }

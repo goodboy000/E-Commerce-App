@@ -10,8 +10,8 @@
 
   <ion-content>
 
-    <div class="appLogo">
-      <img src="{{ appConfig.logo_site }}" alt="{{ appConfig.nom_site }}">
+    <div class="appLogo" *ngIf="appConfiguration">
+      <img (click)="openPage('home')" src="{{ appConfiguration.URL_HOME }}{{ appConfiguration.LOGO_SITE }}" alt="{{ appConfiguration.nom_site }}">
     </div>
 
     <ion-list class="appMenu">
@@ -20,7 +20,7 @@
         Catégories
       </ion-list-header>
       <ion-item *ngFor="let categorie of appCategories">
-        {{ categorie.nomcategorie }}
+        {{ categorie.NOM_CATEGORIE }}
       </ion-item>
 
       <ion-list-header>

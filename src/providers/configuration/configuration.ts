@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs/Observable";
 
 /*
   Generated class for the ConfigurationProvider provider.
@@ -13,13 +14,13 @@ export class ConfigurationProvider {
   constructor(public http: HttpClient) {
   }
 
-  configuration = {
-    logo_site : "https://reservations.spotevasion.com/img/logo-spotevasion.png",
-    nom_site  : "Spot Evasion",
-  }
+  url:string    = 'https://reservations.spotevasion.com/api/configuration';
+  body = {"token": ""};
+  headers = new HttpHeaders()
+    .set('Content-Type', 'application/x-www-form-urlencoded');
 
-  getConfig() {
-    return this.configuration;
+  getConfiguration():Observable<any> {
+    return this.http.post( this.url, this.body,{headers:this.headers} )
   }
 
 }
