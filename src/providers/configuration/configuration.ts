@@ -15,7 +15,7 @@ export class ConfigurationProvider {
   }
 
   url:string    = 'https://reservations.spotevasion.com/api/configuration';
-  body = {"token": ""};
+  body = {"token": "AYhnfo75dndDf097zkFf87554zfhz8fz"};
   headers = new HttpHeaders()
     .set('Content-Type', 'application/x-www-form-urlencoded');
 

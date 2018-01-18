@@ -12,6 +12,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ConfigurationProvider } from '../providers/configuration/configuration';
 import {HttpClientModule} from "@angular/common/http";
 import { CategoriesProvider } from '../providers/categories/categories';
+import { ProduitsProvider } from '../providers/produits/produits';
+import { DiaporamaProvider } from '../providers/diaporama/diaporama';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { CategoriesProvider } from '../providers/categories/categories';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ConfigurationProvider,
-    CategoriesProvider
+    CategoriesProvider,
+    ProduitsProvider,
+    DiaporamaProvider
   ]
 })
 export class AppModule {}

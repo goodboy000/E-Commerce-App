@@ -1,5 +1,5 @@
 // -- Chargement des Elements Angular / Ionic
-import { Component, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,33 +16,20 @@ import {CategoriesProvider} from "../providers/categories/categories";
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+export class MyApp implements OnInit{
 
-  rootPage: any = HomePage;
+  @ViewChild(Nav) nav: Nav;
 
   appConfiguration : any;
   appCategories : any;
+  rootPage: any = HomePage;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public configurationProvider:ConfigurationProvider, public categorieProvider:CategoriesProvider,
               public menuCtrl: MenuController) {
 
+    // -- Chargement de l'Application
     this.initializeApp();
-
-    // -- Récupération de la configuration
-    configurationProvider.getConfiguration().subscribe(
-      configuration => {
-        this.appConfiguration = configuration;
-      }
-    );
-
-    // -- Récupération de la liste des catégories
-    categorieProvider.getCategories().subscribe(
-      categories => {
-        this.appCategories = categories
-      }
-    );
 
   }
 
@@ -55,6 +42,24 @@ export class MyApp {
     });
   }
 
+  ngOnInit(): void {
+
+    // -- Récupération de la configuration
+    this.configurationProvider.getConfiguration().subscribe(
+      configuration => {
+        this.appConfiguration = configuration;
+      }
+    );
+
+    // -- Récupération de la liste des catégories
+    this.categorieProvider.getCategories().subscribe(
+      categories => {
+        this.appCategories = categories
+      }
+    );
+
+  }
+
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
@@ -63,7 +68,7 @@ export class MyApp {
     // console.log(page);
 
     if(page == 'home') {
-      this.nav.setRoot(HomePage);
+      this.nav.setRoot(HomePage,{'configuration':this.appConfiguration});
     }
 
     if(page === 'connexion') {

@@ -3,16 +3,63 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Accueil</ion-title>
+    <ion-title>{{ appTitle }}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Application de Réservation !</h3>
+<ion-content (ionScroll)="onScroll($event)" class="card-background-page">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div *ngIf="appConfiguration">
+
+    <ion-slides pager>
+      <ion-slide *ngFor="let slide of diaporama">
+        <img src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}" alt="{{ slide.IMG_DIAPORAMA }}">
+      </ion-slide>
+    </ion-slides>
+
+    <h3 text-center>Découvrez notre sélection de produits</h3>
+    <p text-center>
+      Bienvenue, découvrez ci-dessous notre sélection de produits<br> pour votre plus grand plaisir !
+      <br><ion-icon name="globe"></ion-icon>
+    </p>
+
+    <ion-card *ngFor="let produit of produits">
+      <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>
+      <ion-card-content>
+        <ion-card-title>
+          <div float-left>{{ produit.NOM_PRODUIT }}</div>
+          <div float-right><ion-icon name="pricetag" large ></ion-icon> {{ produit.TARIF_PRODUIT }} &euro;</div><br>
+          <small>{{ produit.ACCROCHE_PRODUIT }}</small>
+        </ion-card-title>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!--<ion-card *ngFor="let produit of produits">
+
+    <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>
+    <ion-item>
+        <h2>{{ produit.NOM_PRODUIT }}</h2>
+        <p>{{ produit.ACCROCHE_PRODUIT }}</p>
+    </ion-item>-->
+
+    <!--<ion-item>
+      <span item-left><ion-icon name="pricetag" item-left large ></ion-icon></span>
+      <span item-left><h2>{{ produit.TARIF_PRODUIT }} EUR </h2></span>
+    </ion-item>-->
+
+    <!--<ion-item>
+      <span item-left>{{ produit.NOM_CATEGORIE }}</span>
+      <button ion-button icon-left clear item-end>
+        <ion-icon name="eye"></ion-icon>
+        Consulter
+      </button>
+    </ion-item>-->
+
+  <!--</ion-card>-->
+
 </ion-content>
