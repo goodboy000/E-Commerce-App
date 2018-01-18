@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Content, MenuController, NavController, NavParams} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {MenuController, NavController, NavParams} from 'ionic-angular';
 import {ProduitsProvider} from "../../providers/produits/produits";
 import {ConfigurationProvider} from "../../providers/configuration/configuration";
 import {DiaporamaProvider} from "../../providers/diaporama/diaporama";
@@ -10,9 +10,6 @@ import {DiaporamaProvider} from "../../providers/diaporama/diaporama";
 })
 export class HomePage implements OnInit {
 
-  @ViewChild(Content) content: Content;
-
-  appTitle:string = 'Spot Evasion !';
   produits:any;
   appConfiguration: any;
   diaporama: any;
@@ -43,34 +40,7 @@ export class HomePage implements OnInit {
       }
     )
 
-    // --
-    // this.content.ionScroll.subscribe(
-    //   (ev) => {
-    //     console.log(ev)
-    //     if(Math.round(ev.scrollTop) > 360) {
-    //
-    //       this.appTitle = 'Découvrez nos produits';
-    //     } else {
-    //       this.appTitle = 'Spot Evasion !';
-    //     }
-    //   }
-    // )
-
   }
-
-  // onScroll(ev) {
-  //
-  //   console.log(ev);
-  //   this.appTitle = 'Découvrez nos produits';
-  //
-  //   if(Math.round(ev.scrollTop) > 360) {
-  //     this.appTitle = 'Découvrez nos produits';
-  //     console.log('is SUP')
-  //   } else {
-  //     this.appTitle = 'Spot Evasion !';
-  //   }
-  //
-  // }
 
   doRefresh(refresher) {
 

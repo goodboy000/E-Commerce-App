@@ -14,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { CategoriesProvider } from '../providers/categories/categories';
 import { ProduitsProvider } from '../providers/produits/produits';
 import { DiaporamaProvider } from '../providers/diaporama/diaporama';
+import {IonicImageLoader} from "ionic-image-loader";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DiaporamaProvider } from '../providers/diaporama/diaporama';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicImageLoader.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

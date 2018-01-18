@@ -3,11 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ appTitle }}</ion-title>
+    <ion-title>Spot Evasion !</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content (ionScroll)="onScroll($event)" class="card-background-page">
+<ion-content class="card-background-page">
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -17,7 +17,8 @@
 
     <ion-slides pager>
       <ion-slide *ngFor="let slide of diaporama">
-        <img src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}" alt="{{ slide.IMG_DIAPORAMA }}">
+        <!--<img src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}" alt="{{ slide.IMG_DIAPORAMA }}">-->
+        <img-loader src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}" useImg></img-loader>
       </ion-slide>
     </ion-slides>
 
@@ -28,7 +29,8 @@
     </p>
 
     <ion-card *ngFor="let produit of produits">
-      <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>
+      <!--<img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>-->
+      <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
       <ion-card-content>
         <ion-card-title>
           <div float-left>{{ produit.NOM_PRODUIT }}</div>
