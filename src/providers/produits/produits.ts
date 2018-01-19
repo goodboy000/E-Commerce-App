@@ -17,4 +17,7 @@ export class ProduitsProvider {
     return this.http.get( 'https://reservations.spotevasion.com/api/produits' )
   }
 
+  getProduit(idproduit:Number):Observable<any> {
+    return this.http.get( 'https://reservations.spotevasion.com/api/produit/' + idproduit )
+  }
 }

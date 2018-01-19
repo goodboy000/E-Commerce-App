@@ -3,6 +3,7 @@ import {MenuController, NavController, NavParams} from 'ionic-angular';
 import {ProduitsProvider} from "../../providers/produits/produits";
 import {ConfigurationProvider} from "../../providers/configuration/configuration";
 import {DiaporamaProvider} from "../../providers/diaporama/diaporama";
+import {ProduitPage} from "../produit/produit";
 
 @Component({
   selector: 'page-home',
@@ -42,6 +43,7 @@ export class HomePage implements OnInit {
 
   }
 
+  // -- Raffraichir la Vue
   doRefresh(refresher) {
 
     this.ProduitsProvider.getProduits().subscribe(
@@ -50,6 +52,13 @@ export class HomePage implements OnInit {
         refresher.complete();
       }
     );
+  }
+
+  // -- Afficher un Produit
+  getProduit(idproduit) {
+    console.log(idproduit);
+    this.menuCtrl.close();
+    this.navCtrl.push(ProduitPage, {'idproduit': idproduit, configuration: this.appConfiguration});
   }
 
 }

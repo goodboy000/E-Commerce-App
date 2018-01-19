@@ -28,7 +28,7 @@
       <br><ion-icon name="globe"></ion-icon>
     </p>
 
-    <ion-card *ngFor="let produit of produits">
+    <ion-card *ngFor="let produit of produits" (click)="getProduit(produit.id)">
       <!--<img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>-->
       <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
       <ion-card-content>

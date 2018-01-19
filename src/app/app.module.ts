@@ -15,13 +15,15 @@ import { CategoriesProvider } from '../providers/categories/categories';
 import { ProduitsProvider } from '../providers/produits/produits';
 import { DiaporamaProvider } from '../providers/diaporama/diaporama';
 import {IonicImageLoader} from "ionic-image-loader";
+import {ProduitPage} from "../pages/produit/produit";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    ConnexionPage
+    ConnexionPage,
+    ProduitPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import {IonicImageLoader} from "ionic-image-loader";
     MyApp,
     HomePage,
     ListPage,
-    ConnexionPage
+    ConnexionPage,
+    ProduitPage
   ],
   providers: [
     StatusBar,
