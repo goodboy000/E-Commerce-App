@@ -1,17 +1,17 @@
 // -- Chargement des Elements Angular / Ionic
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MenuController, Nav, Platform} from 'ionic-angular';
+import {MenuController, Nav, Platform, ToastController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 // -- Chargement des Pages
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import {ConnexionPage} from "../pages/connexion/connexion";
 
 // -- Chargement des Providers
 import {ConfigurationProvider} from "../providers/configuration/configuration";
 import {CategoriesProvider} from "../providers/categories/categories";
+import {Network} from "@ionic-native/network";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +26,7 @@ export class MyApp implements OnInit{
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public configurationProvider:ConfigurationProvider, public categorieProvider:CategoriesProvider,
-              public menuCtrl: MenuController) {
+              public menuCtrl: MenuController, public toastCtrl: ToastController, public network: Network) {
 
     // -- Chargement de l'Application
     this.initializeApp();
@@ -58,6 +58,18 @@ export class MyApp implements OnInit{
       }
     );
 
+  }
+
+  ionViewLoaded() { }
+
+  ionViewDidEnter() {
+    // https://blog.paulhalliday.io/2017/06/23/ionic-3-network-detection/
+    this.network.onDisconnect().subscribe(() => {
+      this.toastCtrl.create({
+        message: `Vous devez être connecté à internet pour continuer.`,
+        duration: 5000
+      }).present();
+    });
   }
 
   openPage(page) {

@@ -16,6 +16,7 @@ import { ProduitsProvider } from '../providers/produits/produits';
 import { DiaporamaProvider } from '../providers/diaporama/diaporama';
 import {IonicImageLoader} from "ionic-image-loader";
 import {ProduitPage} from "../pages/produit/produit";
+import {Network} from "@ionic-native/network";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ProduitPage} from "../pages/produit/produit";
     ConfigurationProvider,
     CategoriesProvider,
     ProduitsProvider,
-    DiaporamaProvider
+    DiaporamaProvider,
+    Network
   ]
 })
 export class AppModule {}

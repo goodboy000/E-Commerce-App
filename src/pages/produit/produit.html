@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title *ngIf="produit">{{ produit.NOM_PRODUIT }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -19,7 +24,7 @@
     <h2 text-center>{{ produit.NOM_PRODUIT }}</h2>
     <p [innerHtml]="produit.DESCRIPTION_PRODUIT"></p>
     <div padding>
-      <button block ion-button>Ajouter au Panier</button>
+      <button block ion-button full round>Ajouter au Panier</button>
     </div>
   </div>
 </ion-content>

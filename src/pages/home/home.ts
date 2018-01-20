@@ -4,6 +4,7 @@ import {ProduitsProvider} from "../../providers/produits/produits";
 import {ConfigurationProvider} from "../../providers/configuration/configuration";
 import {DiaporamaProvider} from "../../providers/diaporama/diaporama";
 import {ProduitPage} from "../produit/produit";
+import {ImageLoaderConfig} from "ionic-image-loader";
 
 @Component({
   selector: 'page-home',
@@ -16,7 +17,11 @@ export class HomePage implements OnInit {
   diaporama: any;
 
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public ProduitsProvider: ProduitsProvider,
-              public navParams: NavParams, public configurationProvider:ConfigurationProvider, public diaporamaProvider: DiaporamaProvider) {
+              public navParams: NavParams, public configurationProvider:ConfigurationProvider, public diaporamaProvider: DiaporamaProvider,
+              public imageLoaderConfig: ImageLoaderConfig) {
+
+    this.imageLoaderConfig.enableFallbackAsPlaceholder(true);
+
   }
 
   ngOnInit(): void {
