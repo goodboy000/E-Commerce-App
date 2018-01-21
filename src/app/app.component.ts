@@ -12,6 +12,7 @@ import {ConnexionPage} from "../pages/connexion/connexion";
 import {ConfigurationProvider} from "../providers/configuration/configuration";
 import {CategoriesProvider} from "../providers/categories/categories";
 import {Network} from "@ionic-native/network";
+import {ProduitsPage} from "../pages/produits/produits";
 
 @Component({
   templateUrl: 'app.html'
@@ -72,7 +73,7 @@ export class MyApp implements OnInit{
     });
   }
 
-  openPage(page) {
+  openPage(page, params?) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.menuCtrl.close();
@@ -84,7 +85,15 @@ export class MyApp implements OnInit{
     }
 
     if(page === 'connexion') {
-      this.nav.setRoot(ConnexionPage,{'configuration':this.appConfiguration});
+      this.nav.push(ConnexionPage,{'configuration':this.appConfiguration});
+      // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
+      // popover.present();
+    }
+
+    if(page === 'produits') {
+      this.nav.push(ProduitsPage, {'categorie': params, configuration: this.appConfiguration});
+      // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
+      // popover.present();
     }
 
   }

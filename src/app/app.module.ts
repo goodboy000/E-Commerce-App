@@ -17,6 +17,7 @@ import { DiaporamaProvider } from '../providers/diaporama/diaporama';
 import {IonicImageLoader} from "ionic-image-loader";
 import {ProduitPage} from "../pages/produit/produit";
 import {Network} from "@ionic-native/network";
+import {ProduitsPage} from "../pages/produits/produits";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {Network} from "@ionic-native/network";
     HomePage,
     ListPage,
     ConnexionPage,
-    ProduitPage
+    ProduitPage,
+    ProduitsPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import {Network} from "@ionic-native/network";
     HomePage,
     ListPage,
     ConnexionPage,
-    ProduitPage
+    ProduitPage,
+    ProduitsPage
   ],
   providers: [
     StatusBar,

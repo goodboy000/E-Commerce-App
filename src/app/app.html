@@ -19,7 +19,7 @@
       <ion-list-header>
         Catégories
       </ion-list-header>
-      <ion-item *ngFor="let categorie of appCategories">
+      <ion-item *ngFor="let categorie of appCategories" (click)="openPage('produits', categorie)">
         {{ categorie.NOM_CATEGORIE }}
       </ion-item>
 

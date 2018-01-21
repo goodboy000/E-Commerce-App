@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {ProduitsProvider} from "../../providers/produits/produits";
 
 /**
@@ -20,7 +20,8 @@ export class ProduitPage implements OnInit{
   produit:any;
   appConfiguration:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public produitsProvider: ProduitsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public produitsProvider: ProduitsProvider,
+              public viewCtrl: ViewController) {
     this.idproduit        = navParams.get('idproduit');
     this.appConfiguration = navParams.get('configuration');
   }
@@ -35,6 +36,8 @@ export class ProduitPage implements OnInit{
   }
 
   ionViewDidLoad() {
+    // http://digitalsolutionsblog.com/how-to-change-the-back-button-label-in-ionic-2/
+    this.viewCtrl.setBackButtonText('');
     console.log('ionViewDidLoad ProduitPage');
   }
 

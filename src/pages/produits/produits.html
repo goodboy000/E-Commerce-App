@@ -1,0 +1,31 @@
+  <!--
+  Generated template for the ProduitsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ categorie.NOM_CATEGORIE }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="produitsPage" padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 *ngFor="let produit of produits" (click)="getProduit(produit.id)">
+        <div>
+          <div class="produit-entete">
+            <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
+            <h3 text-center>{{ produit.NOM_PRODUIT }}</h3>
+          </div>
+          <p>{{produit.ACCROCHE_PRODUIT}}</p>
+          <p class="tarif"><ion-icon name="pricetag" large ></ion-icon> {{ produit.TARIF_PRODUIT }} EUR</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
