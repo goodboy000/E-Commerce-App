@@ -18,6 +18,8 @@ import {IonicImageLoader} from "ionic-image-loader";
 import {ProduitPage} from "../pages/produit/produit";
 import {Network} from "@ionic-native/network";
 import {ProduitsPage} from "../pages/produits/produits";
+import { AuthenticationProvider } from '../providers/authentication/authentication';
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {ProduitsPage} from "../pages/produits/produits";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    IonicImageLoader.forRoot()
+    IonicImageLoader.forRoot(),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -51,7 +54,8 @@ import {ProduitsPage} from "../pages/produits/produits";
     CategoriesProvider,
     ProduitsProvider,
     DiaporamaProvider,
-    Network
+    Network,
+    AuthenticationProvider
   ]
 })
 export class AppModule {}

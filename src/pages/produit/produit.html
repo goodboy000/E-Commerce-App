@@ -21,11 +21,11 @@
 </ion-header>
 
 
-<ion-content class="produitPage" padding>
+<ion-content class="produitPage" no-padding>
   <div *ngIf="produit">
     <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
-    <h2 text-center>{{ produit.NOM_PRODUIT }}</h2>
-    <p [innerHtml]="produit.DESCRIPTION_PRODUIT"></p>
+    <!--<h2 text-center>{{ produit.NOM_PRODUIT }}</h2>-->
+    <p padding [innerHtml]="produit.DESCRIPTION_PRODUIT"></p>
     <div padding>
       <button block ion-button full round>Ajouter au Panier</button>
     </div>

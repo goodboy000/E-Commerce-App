@@ -16,7 +16,7 @@
 <ion-content class="produitsPage" padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-6 *ngFor="let produit of produits" (click)="getProduit(produit.id)">
+      <ion-col col-6 *ngFor="let produit of produits" (click)="getProduit(produit.id)" class="produit">
         <div>
           <div class="produit-entete">
             <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>

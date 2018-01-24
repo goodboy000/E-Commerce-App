@@ -43,4 +43,23 @@ page-produits {
 
   }
 
+  .col-6 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+  }
+
+  .col-6 {
+    padding: 5px;
+  }
+
+}
+
+.produit:nth-child(3n) {
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
 }

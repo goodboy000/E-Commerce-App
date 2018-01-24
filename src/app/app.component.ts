@@ -65,6 +65,7 @@ export class MyApp implements OnInit{
 
   ionViewDidEnter() {
     // https://blog.paulhalliday.io/2017/06/23/ionic-3-network-detection/
+    // TODO Ne fonctionne pas...
     this.network.onDisconnect().subscribe(() => {
       this.toastCtrl.create({
         message: `Vous devez être connecté à internet pour continuer.`,
