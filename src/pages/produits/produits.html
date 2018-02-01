@@ -19,7 +19,7 @@
       <ion-col col-6 *ngFor="let produit of produits" (click)="getProduit(produit.id)" class="produit">
         <div>
           <div class="produit-entete">
-            <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
+            <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}">
             <h3 text-center>{{ produit.NOM_PRODUIT }}</h3>
           </div>
           <p>{{produit.ACCROCHE_PRODUIT}}</p>

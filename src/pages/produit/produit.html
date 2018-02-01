@@ -23,7 +23,7 @@
 
 <ion-content class="produitPage" no-padding>
   <div *ngIf="produit">
-    <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
+    <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}">
     <!--<h2 text-center>{{ produit.NOM_PRODUIT }}</h2>-->
     <p padding [innerHtml]="produit.DESCRIPTION_PRODUIT"></p>
     <div padding>

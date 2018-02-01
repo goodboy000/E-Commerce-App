@@ -1,3 +1,38 @@
 page-connexion {
+}
 
+.forgetpwd, a {
+  color: #000;
+}
+
+.connexion {
+  background: url("../../assets/fond2.jpg") no-repeat;
+  background-size: cover;
+
+  ion-item {
+    background-color: #ffffff3b;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border-bottom : 0px !important;
+    box-shadow: inherit !important;
+
+    .item-inner {
+      border-bottom : 0px !important;
+      box-shadow: inherit !important;
+    }
+
+  }
+
+}
+
+.appLogo {
+  margin-bottom: 40px;
+}
+
+// https://stackoverflow.com/questions/37118385/styling-ionic-2-toast
+.toast-danger {
+  > div {
+    background-color: #990000 !important;
+    color: #FFF !important;
+  }
 }

@@ -20,6 +20,7 @@ import {Network} from "@ionic-native/network";
 import {ProduitsPage} from "../pages/produits/produits";
 import { AuthenticationProvider } from '../providers/authentication/authentication';
 import {IonicStorageModule} from "@ionic/storage";
+import {ProfilPage} from "../pages/profil/profil";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {IonicStorageModule} from "@ionic/storage";
     ListPage,
     ConnexionPage,
     ProduitPage,
-    ProduitsPage
+    ProduitsPage,
+    ProfilPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import {IonicStorageModule} from "@ionic/storage";
     ListPage,
     ConnexionPage,
     ProduitPage,
-    ProduitsPage
+    ProduitsPage,
+    ProfilPage
   ],
   providers: [
     StatusBar,

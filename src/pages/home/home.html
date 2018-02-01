@@ -5,7 +5,10 @@
     </button>
     <ion-title>Spot Evasion !</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
+      <button *ngIf="isAuthenticated" ion-button icon-only (click)="goToProfil()">
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button *ngIf="!isAuthenticated" ion-button icon-only (click)="goToLogin()">
         <ion-icon name="person"></ion-icon>
       </button>
       <button ion-button icon-only>
@@ -26,7 +29,7 @@
     <ion-slides pager>
       <ion-slide *ngFor="let slide of diaporama">
         <!--<img src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}" alt="{{ slide.IMG_DIAPORAMA }}">-->
-        <img-loader src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}" useImg></img-loader>
+        <img src="{{ appConfiguration.URL_HOME }}/plugins/images/heading-bg/{{ slide.IMG_DIAPORAMA }}">
       </ion-slide>
     </ion-slides>
 
@@ -38,7 +41,7 @@
 
     <ion-card *ngFor="let produit of produits" (click)="getProduit(produit.id)">
       <!--<img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>-->
-      <img-loader src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}" useImg></img-loader>
+      <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}">
       <ion-card-content>
         <ion-card-title>
           <div float-left>{{ produit.NOM_PRODUIT }}</div>

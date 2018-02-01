@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+  Events, Haptic, IonicPage, LoadingController, NavController, NavParams, ToastController,
+  ViewController
+} from 'ionic-angular';
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
+import {ProfilPage} from "../profil/profil"
 
 /**
  * Generated class for the ConnexionPage page.
@@ -18,56 +22,92 @@ export class ConnexionPage {
 
   appConfiguration: any;
   error:boolean = false;
+  loading:boolean = false;
   user = {
     email     : "hugo@biyn.media",
-    password  : "sommaires"
+    password  : "sommaire"
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authenticationProvider: AuthenticationProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authenticationProvider: AuthenticationProvider,
+              public toastCtrl: ToastController, public viewCtrl: ViewController, public haptic:Haptic, public events:Events,
+              public loadingCtrl: LoadingController) {
     this.appConfiguration = navParams.get('configuration');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConnexionPage');
+      this.viewCtrl.setBackButtonText('');
   }
 
   connexion() {
+
+    this.loading = true;
 
       // let authStatus = this.authenticationProvider.connexion(this.user);
       // console.log(authStatus);
 
     this.authenticationProvider.grantAccess(this.user, isAutorize => {
-      console.log(isAutorize);
+      // console.log(isAutorize);
+      this.loading = false;
       if(isAutorize.status) {
 
-        this.authenticationProvider.getTokenData(user => {
-          console.log('getTokenData');
-          console.log(user);
-        });
+        // this.navCtrl.push(ProfilPage);
+        // this.haptic.notification({ type: 'success' });
 
-        this.authenticationProvider.checkTokenExpiration(isTokenExpired => {
-          console.log('isTokenExpired');
-          console.log(isTokenExpired);
-        });
+        // this.authenticationProvider.getTokenData(user => {
 
-        this.authenticationProvider.getToken().then(
-          token => {
-            console.log('getTokenExpirationDate');
-            let date = this.authenticationProvider.getTokenExpirationDate(token);
-            console.log(date);
-          }
-        )
+          let loading = this.loadingCtrl.create({
+            content: `Bienvenue ${ isAutorize.prenom }...`
+          });
 
-        this.authenticationProvider.removeAccess();
+          loading.present();
 
-        this.authenticationProvider.getToken().then(
-          token => {
-            console.log('getTokenExpirationDate after Expiration');
-            console.log(token);
-          }
-        )
+          setTimeout(() => {
+            this.events.publish('user:isAuthenticated', isAutorize);
+            this.navCtrl.setRoot(ProfilPage, {configuration: this.appConfiguration});
+          }, 1000);
+
+          setTimeout(() => {
+            loading.dismiss();
+          }, 2000);
+
+        // });
+
+        // this.authenticationProvider.checkTokenExpiration(isTokenExpired => {
+        //   console.log('isTokenExpired');
+        //   console.log(isTokenExpired);
+        // });
+
+        // this.authenticationProvider.getToken().then(
+        //   token => {
+        //     console.log('getTokenExpirationDate');
+        //     let date = this.authenticationProvider.getTokenExpirationDate(token);
+        //     console.log(date);
+        //   }
+        // )
+
+        // this.authenticationProvider.removeAccess();
+
+        // this.authenticationProvider.getToken().then(
+        //   token => {
+        //     console.log('getTokenExpirationDate after Expiration');
+        //     console.log(token);
+        //   }
+        // )
 
       } else {
+
+        this.user.password = "";
+
+        this.haptic.notification({ type: 'error' });
+
+        let toast = this.toastCtrl.create({
+          message: isAutorize.response.msg,
+          position: 'top',
+          cssClass: 'toast-danger',
+          duration: 3000
+        });
+        toast.present();
 
       }
     });

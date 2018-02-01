@@ -1,0 +1,63 @@
+<!--
+  Generated template for the ProfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mon Profil</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="cart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+<div *ngIf="user && appConfiguration">
+
+  <div class="user-bg">
+    <img width="100%" alt="user" src="{{ appConfiguration.URL_HOME }}/plugins/images/large/img1.jpg">
+    <div class="overlay-box">
+      <div class="user-content">
+        <a href="javascript:void(0)">
+          <img src="{{ appConfiguration.URL_HOME }}/plugins/images/users/{{ user.PHOTO_CLIENT }}" class="thumb-lg img-circle" alt="img">
+        </a>
+        <h3>{{ user.PRENOM_CLIENT }} {{ user.NOM_CLIENT }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-item-divider color="light">Mes Informations</ion-item-divider>
+    <ion-item *ngIf="user.EMAIL_CLIENT"><strong>Email :</strong> {{ user.EMAIL_CLIENT }}</ion-item>
+    <ion-item *ngIf="user.TEL_CLIENT"><strong>Téléphone :</strong> {{ user.TEL_CLIENT }}</ion-item>
+    <ion-item *ngIf="user.ADRESSE_CLIENT"><strong>Adresse :</strong> {{ user.ADRESSE_CLIENT }}</ion-item>
+    <ion-item *ngIf="user.CP_CLIENT"><strong>Code Postal :</strong> {{ user.CP_CLIENT }}</ion-item>
+    <ion-item *ngIf="user.VILLE_CLIENT"><strong>Ville :</strong> {{ user.VILLE_CLIENT }}</ion-item>
+    <ion-item *ngIf="user.PAYS_CLIENT"><strong>Pays :</strong> {{ user.PAYS_CLIENT }}</ion-item>
+  </ion-list>
+
+  <p text-center><strong>Dernière Connexion :</strong><br> {{ user.LOG_CLIENT }}</p>
+
+  <ion-list>
+    <ion-item-divider color="light">Nous contacter</ion-item-divider>
+    <ion-item>{{ appConfiguration.NOM_SITE }}</ion-item>
+    <ion-item>{{ appConfiguration.PRENOM }}</ion-item>
+    <ion-item>{{ appConfiguration.TEL_SITE }}</ion-item>
+    <ion-item>{{ appConfiguration.EMAILPROFIL }}</ion-item>
+  </ion-list>
+
+</div>
+
+</ion-content>

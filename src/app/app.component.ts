@@ -1,6 +1,6 @@
 // -- Chargement des Elements Angular / Ionic
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MenuController, Nav, Platform, ToastController} from 'ionic-angular';
+import {Events, MenuController, Nav, Platform, ToastController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -13,6 +13,8 @@ import {ConfigurationProvider} from "../providers/configuration/configuration";
 import {CategoriesProvider} from "../providers/categories/categories";
 import {Network} from "@ionic-native/network";
 import {ProduitsPage} from "../pages/produits/produits";
+import {AuthenticationProvider} from "../providers/authentication/authentication";
+import {ProfilPage} from "../pages/profil/profil";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,10 +26,13 @@ export class MyApp implements OnInit{
   appConfiguration : any;
   appCategories : any;
   rootPage: any = HomePage;
+  isUserAuthenticated:boolean = false;
+  user:any;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public configurationProvider:ConfigurationProvider, public categorieProvider:CategoriesProvider,
-              public menuCtrl: MenuController, public toastCtrl: ToastController, public network: Network) {
+              public menuCtrl: MenuController, public toastCtrl: ToastController, public network: Network,
+              public Auth: AuthenticationProvider, public events: Events) {
 
     // -- Chargement de l'Application
     this.initializeApp();
@@ -44,6 +49,33 @@ export class MyApp implements OnInit{
   }
 
   ngOnInit(): void {
+
+    console.clear();
+
+    // -- Ecoute la connexion d'un utilisateur
+    this.events.subscribe('user:isAuthenticated', isAutorize => {
+      this.isUserAuthenticated = isAutorize;
+      this.Auth.getTokenData(user => {
+        this.user = user;
+      });
+    });
+
+    // -- Vérification de la connexion de l'utilisateur
+    /**
+     * Si l'utilisateur est bien authentifié, on met juste a jour ses informations de profil
+     * au cas ou elle aurait changé depuis la dernière connexion.
+     */
+    this.Auth.isUserAuthenticated(isAuth => {
+      this.isUserAuthenticated = isAuth;
+      if(isAuth) {
+
+        this.Auth.refreshUserData();
+        this.Auth.getTokenData(user => {
+          this.user = user;
+        });
+
+      }
+    });
 
     // -- Récupération de la configuration
     this.configurationProvider.getConfiguration().subscribe(
@@ -91,6 +123,28 @@ export class MyApp implements OnInit{
       // popover.present();
     }
 
+    if(page === 'profil') {
+      this.nav.push(ProfilPage,{'configuration':this.appConfiguration});
+      // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
+      // popover.present();
+    }
+
+    if(page === 'deconnexion') {
+
+      this.isUserAuthenticated = false;
+      this.user = false;
+      this.Auth.removeAccess();
+
+      this.toastCtrl.create({
+        message: `Deconnexion...`,
+        duration: 3000,
+        position:'top'
+      }).present();
+
+      this.nav.setRoot(HomePage);
+
+    }
+
     if(page === 'produits') {
       this.nav.push(ProduitsPage, {'categorie': params, configuration: this.appConfiguration});
       // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
@@ -98,4 +152,62 @@ export class MyApp implements OnInit{
     }
 
   }
+
+  // --------------------------- DEBUG PART
+
+  getToken() {
+    this.Auth.getToken().then(
+      token => {
+        if(!token) return "Aucun Token";
+        console.log('getToken');
+        console.log(token);
+      }
+    )
+  }
+
+  getTokenExpirationDate() {
+    this.Auth.getToken().then(
+      token => {
+        if(!token) return false;
+
+        console.log('getTokenExpirationDate');
+        let date = this.Auth.getTokenExpirationDate(token);
+        console.log(date);
+
+      }
+    )
+  }
+
+  DebugIsUserAuthenticated() {
+    this.Auth.isUserAuthenticated(isAuth => {
+      console.log('isUserAuth = ');
+      console.log(isAuth)
+    });
+  }
+
+  getAuthStatus() {
+    console.log(this.isUserAuthenticated);
+  }
+
+  clearConsole() { console.clear(); }
+
+  isTokenExpired() {
+    this.Auth.checkTokenExpiration(isTokenExpired => {
+      console.log('isTokenExpired');
+      console.log(isTokenExpired);
+    });
+  }
+
+  AllowUserAccess() {
+    console.log('allowUserAccess');
+    console.log(this.Auth.allowUserAccess());
+  }
+
+  getTokenData() {
+    console.log('getTokenData');
+    this.Auth.getTokenData(user => {
+      console.log(user);
+    })
+  }
+
 }
