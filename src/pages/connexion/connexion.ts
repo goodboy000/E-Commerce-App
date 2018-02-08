@@ -28,8 +28,13 @@ export class ConnexionPage {
     password  : "sommaire"
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authenticationProvider: AuthenticationProvider,
-              public toastCtrl: ToastController, public viewCtrl: ViewController, public haptic:Haptic, public events:Events,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public authenticationProvider: AuthenticationProvider,
+              public toastCtrl: ToastController,
+              public viewCtrl: ViewController,
+              public haptic:Haptic,
+              public events:Events,
               public loadingCtrl: LoadingController) {
     this.appConfiguration = navParams.get('configuration');
   }

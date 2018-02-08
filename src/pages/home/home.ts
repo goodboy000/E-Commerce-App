@@ -79,7 +79,7 @@ export class HomePage implements OnInit {
     this.navCtrl.push(ProfilPage, {configuration: this.appConfiguration});
   }
 
-  goToLogin() { 
+  goToLogin() {
     this.navCtrl.push(ConnexionPage, {configuration: this.appConfiguration});
   }
 

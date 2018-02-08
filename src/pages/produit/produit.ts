@@ -30,7 +30,7 @@ export class ProduitPage implements OnInit{
     this.produitsProvider.getProduit(this.idproduit).subscribe(
       produit => {
         this.produit = produit[0];
-        console.log(this.produit.NOM_PRODUIT);
+        // console.log(this.produit.NOM_PRODUIT);
       }
     )
   }

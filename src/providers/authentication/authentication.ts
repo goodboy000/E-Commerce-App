@@ -203,4 +203,29 @@ export class AuthenticationProvider {
 
   }
 
+  saveUserData(user:any, callback : (response) => void){
+
+    this.getToken().then(token => {
+
+      let headers = new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        .set('Authorization', 'Bearer ' + token);
+
+      const body = { "user": user };
+
+      this.http.post( 'https://reservations.spotevasion.com/api/saveuserdata', body,{headers:headers} ).subscribe(
+        token => {
+          console.log(token);
+          let t:any = token;
+          if(t.success) {
+            this.setToken(t.jwt);
+            callback({'data':true});
+          }
+        }
+      );
+
+    })
+
+  }
+
 }

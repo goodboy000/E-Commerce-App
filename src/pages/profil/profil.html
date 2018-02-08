@@ -39,21 +39,61 @@
   </div>
 
   <ion-list>
-    <ion-item-divider color="light">Mes Informations</ion-item-divider>
-    <ion-item *ngIf="user.EMAIL_CLIENT"><strong>Email :</strong> {{ user.EMAIL_CLIENT }}</ion-item>
-    <ion-item *ngIf="user.TEL_CLIENT"><strong>Téléphone :</strong> {{ user.TEL_CLIENT }}</ion-item>
-    <ion-item *ngIf="user.ADRESSE_CLIENT"><strong>Adresse :</strong> {{ user.ADRESSE_CLIENT }}</ion-item>
-    <ion-item *ngIf="user.CP_CLIENT"><strong>Code Postal :</strong> {{ user.CP_CLIENT }}</ion-item>
-    <ion-item *ngIf="user.VILLE_CLIENT"><strong>Ville :</strong> {{ user.VILLE_CLIENT }}</ion-item>
-    <ion-item *ngIf="user.PAYS_CLIENT"><strong>Pays :</strong> {{ user.PAYS_CLIENT }}</ion-item>
+    <ion-item-divider color="light">Espace Clients</ion-item-divider>
+    <button ion-item>Mes commandes</button>
+    <button ion-item>Messagerie</button>
   </ion-list>
+
+  <form *ngIf="active" name="form" (ngSubmit)="saveUserProfil()" #f="ngForm" novalidate>
+
+    <ion-list>
+      <ion-item-divider color="light">Mes Informations</ion-item-divider>
+
+      <ion-item>
+        <ion-input required [(ngModel)]="user.PRENOM_CLIENT" name="prenom" #prenom="ngModel" placeholder="Prénom" type="text"></ion-input></ion-item>
+
+      <ion-item>
+        <ion-input required [(ngModel)]="user.NOM_CLIENT" name="nom" #nom="ngModel" placeholder="Nom" type="text"></ion-input></ion-item>
+
+      <ion-item>
+        <!-- https://stackoverflow.com/questions/42366649/angular2-email-validation -->
+        <ion-input required [(ngModel)]="user.EMAIL_CLIENT"
+                   name="email" #email="ngModel" placeholder="Email"
+                   type="email" email></ion-input></ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="user.TEL_CLIENT" name="tel" #tel="ngModel" placeholder="Téléphone" type="text"></ion-input></ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="user.ADRESSE_CLIENT" name="adresse" #adresse="ngModel" placeholder="Adresse" type="text"></ion-input></ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="user.CP_CLIENT" name="cp" #cp="ngModel" placeholder="Code Postale" type="text"></ion-input></ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="user.VILLE_CLIENT" name="ville" #ville="ngModel" placeholder="Ville" type="text"></ion-input></ion-item>
+
+      <ion-item>
+        <ion-input [(ngModel)]="user.PAYS_CLIENT" name="pays" #pays="ngModel" placeholder="Pays" type="text"></ion-input></ion-item>
+
+      <div padding>
+        <button *ngIf="f.dirty" [disabled]="f.invalid"
+                block ion-button round outline color="dark">
+          <span *ngIf="!loadingProfil">Enregistrer</span>
+          <ion-spinner name="crescent" *ngIf="loadingProfil" class="button-spinner"></ion-spinner>
+        </button>
+      </div>
+
+    </ion-list>
+
+  </form>
 
   <p text-center><strong>Dernière Connexion :</strong><br> {{ user.LOG_CLIENT }}</p>
 
   <ion-list>
     <ion-item-divider color="light">Nous contacter</ion-item-divider>
     <ion-item>{{ appConfiguration.NOM_SITE }}</ion-item>
-    <ion-item>{{ appConfiguration.PRENOM }}</ion-item>
+    <ion-item>{{ appConfiguration.PRENOM }} {{ appConfiguration.NOM }}</ion-item>
     <ion-item>{{ appConfiguration.TEL_SITE }}</ion-item>
     <ion-item>{{ appConfiguration.EMAILPROFIL }}</ion-item>
   </ion-list>
