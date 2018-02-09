@@ -184,6 +184,7 @@ export class AuthenticationProvider {
 
   refreshUserData(){
 
+    console.log('refreshUserData');
     // let token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmVzZXJ2YXRpb25zLnNwb3RldmFzaW9uLmNvbSIsImF1ZCI6Imh0dHBzOlwvXC9yZXNlcnZhdGlvbnMuc3BvdGV2YXNpb24uY29tIiwiaWF0IjoxNTE3NDgxNjQyLCJuYmYiOjE1MTc0ODE2NDcsImV4cCI6MTUxNzQ4NTI0MiwiZGF0YSI6eyJpZCI6IjEyIiwiUFJFTk9NX0NMSUVOVCI6Ikh1Z28iLCJOT01fQ0xJRU5UIjoiTElFR0VBUkQiLCJURUxfQ0xJRU5UIjoiMDc4Mzk3MTUxNSIsIlBIT1RPX0NMSUVOVCI6Ikh1Z29MSUVHRUFSRDE1MTkwMDc5NTEuanBnIiwiQURSRVNTRV9DTElFTlQiOiIiLCJDUF9DTElFTlQiOiIiLCJWSUxMRV9DTElFTlQiOiIiLCJQQVlTX0NMSUVOVCI6IiIsIkVNQUlMX0NMSUVOVCI6Imh1Z29AYml5bi5tZWRpYSIsIlBBU1NXT1JEX0NMSUVOVCI6IiQyeSQxMCRKVUVVekRUUjZJMWhVYmh1dHI1Y1RlV1FKMVZTUnRuN1RRU08zM1h0ZGlsQS5xQU9QNHZtVyIsIkRBVEVJTlNDUklQVElPTl9DTElFTlQiOiIyMDE4LTAxLTIzIDEzOjAxOjQzIiwiTE9HX0NMSUVOVCI6ImxlIDAxXC8wMlwvMjAxOCAwOTo1OSBkZXB1aXMgMzcuMTY4LjIyOC4yMzIifX0.epaDfbiuv1bafaixb_b9IK8gQv4T8sGcC2PiG3I95Kc';//this.getTokenFromAsync();
     return this.getToken().then(token => {
 
@@ -204,7 +205,6 @@ export class AuthenticationProvider {
   }
 
   saveUserData(user:any, callback : (response) => void){
-
     this.getToken().then(token => {
 
       let headers = new HttpHeaders()
@@ -215,7 +215,6 @@ export class AuthenticationProvider {
 
       this.http.post( 'https://reservations.spotevasion.com/api/saveuserdata', body,{headers:headers} ).subscribe(
         token => {
-          console.log(token);
           let t:any = token;
           if(t.success) {
             this.setToken(t.jwt);

@@ -69,7 +69,7 @@ export class MyApp implements OnInit{
       this.isUserAuthenticated = isAuth;
       if(isAuth) {
 
-        this.Auth.refreshUserData();
+        this.Auth.refreshUserData()
         this.Auth.getTokenData(user => {
           this.user = user;
         });
