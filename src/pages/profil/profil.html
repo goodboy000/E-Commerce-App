@@ -41,7 +41,7 @@
   <ion-list>
     <ion-item-divider color="light">Espace Clients</ion-item-divider>
     <button ion-item>Mes commandes</button>
-    <button ion-item>Messagerie</button>
+    <button (click)="goToMessage()" ion-item>Messagerie</button>
   </ion-list>
 
   <form *ngIf="active" name="form" (ngSubmit)="saveUserProfil()" #f="ngForm" novalidate>

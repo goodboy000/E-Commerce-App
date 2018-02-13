@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuController, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {ProduitsProvider} from "../../providers/produits/produits";
-import {ProduitPage} from "../produit/produit";
 
 /**
  * Generated class for the ProduitsPage page.
@@ -10,6 +9,7 @@ import {ProduitPage} from "../produit/produit";
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-produits',
   templateUrl: 'produits.html',
@@ -43,7 +43,7 @@ export class ProduitsPage implements OnInit{
   // -- Afficher un Produit
   getProduit(idproduit) {
     this.menuCtrl.close();
-    this.navCtrl.push(ProduitPage, {'idproduit': idproduit, configuration: this.appConfiguration});
+    this.navCtrl.push('ProduitPage', {'idproduit': idproduit, configuration: this.appConfiguration});
   }
 
 }

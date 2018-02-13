@@ -4,7 +4,6 @@ import {
   ViewController
 } from 'ionic-angular';
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
-import {ProfilPage} from "../profil/profil"
 
 /**
  * Generated class for the ConnexionPage page.
@@ -69,7 +68,7 @@ export class ConnexionPage {
 
           setTimeout(() => {
             this.events.publish('user:isAuthenticated', isAutorize);
-            this.navCtrl.setRoot(ProfilPage, {configuration: this.appConfiguration});
+            this.navCtrl.setRoot('ProfilPage', {configuration: this.appConfiguration});
           }, 1000);
 
           setTimeout(() => {

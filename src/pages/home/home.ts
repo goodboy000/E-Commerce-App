@@ -1,14 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MenuController, NavController, NavParams} from 'ionic-angular';
-import {ProduitsProvider} from "../../providers/produits/produits";
+import {Component, OnInit} from '@angular/core';
+import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
 import {ConfigurationProvider} from "../../providers/configuration/configuration";
 import {DiaporamaProvider} from "../../providers/diaporama/diaporama";
-import {ProduitPage} from "../produit/produit";
 import {ImageLoaderConfig} from "ionic-image-loader";
-import {ProfilPage} from "../profil/profil";
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
-import {ConnexionPage} from "../connexion/connexion";
+import {ProduitsProvider} from "../../providers/produits/produits";
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -18,12 +16,16 @@ export class HomePage implements OnInit {
   produits:any;
   appConfiguration: any;
   diaporama: any;
-  profilPage:any = ProfilPage;
   isAuthenticated:boolean = false;
 
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController, public ProduitsProvider: ProduitsProvider,
-              public navParams: NavParams, public configurationProvider:ConfigurationProvider, public diaporamaProvider: DiaporamaProvider,
-              public imageLoaderConfig: ImageLoaderConfig, public Auth: AuthenticationProvider) {
+  constructor(public navCtrl: NavController,
+              public menuCtrl: MenuController,
+              public ProduitsProvider: ProduitsProvider,
+              public navParams: NavParams,
+              public configurationProvider:ConfigurationProvider,
+              public diaporamaProvider: DiaporamaProvider,
+              public imageLoaderConfig: ImageLoaderConfig,
+              public Auth: AuthenticationProvider) {
 
     this.imageLoaderConfig.enableFallbackAsPlaceholder(true);
   }
@@ -59,7 +61,6 @@ export class HomePage implements OnInit {
 
   // -- Raffraichir la Vue
   doRefresh(refresher) {
-
     this.ProduitsProvider.getProduits().subscribe(
       produits => {
         this.produits = produits;
@@ -70,17 +71,20 @@ export class HomePage implements OnInit {
 
   // -- Afficher un Produit
   getProduit(idproduit) {
-    console.log(idproduit);
     this.menuCtrl.close();
-    this.navCtrl.push(ProduitPage, {'idproduit': idproduit, configuration: this.appConfiguration});
+    this.navCtrl.push('ProduitPage', {'idproduit': idproduit, configuration: this.appConfiguration});
   }
 
   goToProfil() {
-    this.navCtrl.push(ProfilPage, {configuration: this.appConfiguration});
+    this.navCtrl.push('ProfilPage', {configuration: this.appConfiguration});
   }
 
   goToLogin() {
-    this.navCtrl.push(ConnexionPage, {configuration: this.appConfiguration});
+    this.navCtrl.push('ConnexionPage', {configuration: this.appConfiguration});
+  }
+
+  goToMessage() {
+    this.navCtrl.push('MessagePage');
   }
 
 }

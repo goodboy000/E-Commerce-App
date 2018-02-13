@@ -20,7 +20,9 @@ export class ProduitPage implements OnInit{
   produit:any;
   appConfiguration:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public produitsProvider: ProduitsProvider,
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public produitsProvider: ProduitsProvider,
               public viewCtrl: ViewController) {
     this.idproduit        = navParams.get('idproduit');
     this.appConfiguration = navParams.get('configuration');

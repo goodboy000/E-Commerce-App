@@ -4,17 +4,11 @@ import {Events, MenuController, Nav, Platform, ToastController} from 'ionic-angu
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-// -- Chargement des Pages
-import { HomePage } from '../pages/home/home';
-import {ConnexionPage} from "../pages/connexion/connexion";
-
 // -- Chargement des Providers
 import {ConfigurationProvider} from "../providers/configuration/configuration";
 import {CategoriesProvider} from "../providers/categories/categories";
 import {Network} from "@ionic-native/network";
-import {ProduitsPage} from "../pages/produits/produits";
 import {AuthenticationProvider} from "../providers/authentication/authentication";
-import {ProfilPage} from "../pages/profil/profil";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,14 +19,20 @@ export class MyApp implements OnInit{
 
   appConfiguration : any;
   appCategories : any;
-  rootPage: any = HomePage;
+  rootPage: any = 'HomePage';
   isUserAuthenticated:boolean = false;
   user:any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public configurationProvider:ConfigurationProvider, public categorieProvider:CategoriesProvider,
-              public menuCtrl: MenuController, public toastCtrl: ToastController, public network: Network,
-              public Auth: AuthenticationProvider, public events: Events) {
+  constructor(public platform: Platform,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              public configurationProvider:ConfigurationProvider,
+              public categorieProvider:CategoriesProvider,
+              public menuCtrl: MenuController,
+              public toastCtrl: ToastController,
+              public network: Network,
+              public Auth: AuthenticationProvider,
+              public events: Events) {
 
     // -- Chargement de l'Application
     this.initializeApp();
@@ -111,44 +111,51 @@ export class MyApp implements OnInit{
     // we wouldn't want the back button to show in this scenario
     this.menuCtrl.close();
 
-    // console.log(page);
+    switch (page) {
+      case "home": {
+        this.nav.setRoot('HomePage',{'configuration':this.appConfiguration});
+        break;
+      }
 
-    if(page == 'home') {
-      this.nav.setRoot(HomePage,{'configuration':this.appConfiguration});
-    }
+      case "connexion": {
+        this.nav.push('ConnexionPage',{'configuration':this.appConfiguration});
+        break;
+      }
 
-    if(page === 'connexion') {
-      this.nav.push(ConnexionPage,{'configuration':this.appConfiguration});
-      // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
-      // popover.present();
-    }
+      case "messagerie": {
+        this.nav.push('MessagePage');
+        break;
+      }
 
-    if(page === 'profil') {
-      this.nav.push(ProfilPage,{'configuration':this.appConfiguration});
-      // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
-      // popover.present();
-    }
+      case "profil": {
+        this.nav.push('ProfilPage',{'configuration':this.appConfiguration});
+        break;
+      }
 
-    if(page === 'deconnexion') {
+      case "deconnexion": {
+        this.isUserAuthenticated = false;
+        this.user = false;
+        this.Auth.removeAccess();
 
-      this.isUserAuthenticated = false;
-      this.user = false;
-      this.Auth.removeAccess();
+        this.toastCtrl.create({
+          message: `Deconnexion...`,
+          duration: 3000,
+          position:'top'
+        }).present();
 
-      this.toastCtrl.create({
-        message: `Deconnexion...`,
-        duration: 3000,
-        position:'top'
-      }).present();
+        this.nav.setRoot('HomePage');
+        break;
+      }
 
-      this.nav.setRoot(HomePage);
+      case "produits": {
+        this.nav.push('ProduitsPage', {'categorie': params, configuration: this.appConfiguration});
+        break;
+      }
 
-    }
-
-    if(page === 'produits') {
-      this.nav.push(ProduitsPage, {'categorie': params, configuration: this.appConfiguration});
-      // let popover = this.popoverCtrl.create(ConnexionPage,{'configuration':this.appConfiguration});
-      // popover.present();
+      default: {
+        this.nav.setRoot('HomePage');
+        break;
+      }
     }
 
   }

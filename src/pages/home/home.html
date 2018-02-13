@@ -11,6 +11,9 @@
       <button *ngIf="!isAuthenticated" ion-button icon-only (click)="goToLogin()">
         <ion-icon name="person"></ion-icon>
       </button>
+      <button *ngIf="isAuthenticated" ion-button icon-only (click)="goToMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
       <button ion-button icon-only>
         <ion-icon name="cart"></ion-icon>
       </button>
@@ -50,29 +53,7 @@
         </ion-card-title>
       </ion-card-content>
     </ion-card>
+
   </div>
-
-  <!--<ion-card *ngFor="let produit of produits">
-
-    <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}"/>
-    <ion-item>
-        <h2>{{ produit.NOM_PRODUIT }}</h2>
-        <p>{{ produit.ACCROCHE_PRODUIT }}</p>
-    </ion-item>-->
-
-    <!--<ion-item>
-      <span item-left><ion-icon name="pricetag" item-left large ></ion-icon></span>
-      <span item-left><h2>{{ produit.TARIF_PRODUIT }} EUR </h2></span>
-    </ion-item>-->
-
-    <!--<ion-item>
-      <span item-left>{{ produit.NOM_CATEGORIE }}</span>
-      <button ion-button icon-left clear item-end>
-        <ion-icon name="eye"></ion-icon>
-        Consulter
-      </button>
-    </ion-item>-->
-
-  <!--</ion-card>-->
 
 </ion-content>

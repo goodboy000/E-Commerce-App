@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {AuthenticationProvider} from "../../providers/authentication/authentication";
 
 /**
@@ -9,6 +9,7 @@ import {AuthenticationProvider} from "../../providers/authentication/authenticat
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-profil',
   templateUrl: 'profil.html',
@@ -36,7 +37,6 @@ export class ProfilPage {
   ionViewDidLoad() {
     this.viewCtrl.setBackButtonText('');
     this.Auth.getTokenData(user => {
-      console.log(user);
       this.user = user;
     });
     console.log('ionViewDidLoad ProfilPage');
@@ -62,6 +62,10 @@ export class ProfilPage {
         toast.present();
       }
     });
+  }
+
+  goToMessage() {
+    this.navCtrl.push('MessagePage');
   }
 
 }

@@ -1,9 +1,3 @@
-<!--
-  Generated template for the ProduitPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -24,7 +18,6 @@
 <ion-content class="produitPage" no-padding>
   <div *ngIf="produit">
     <img src="{{ appConfiguration.URL_HOME }}/img/produits/{{ produit.IMG_PRODUIT }}">
-    <!--<h2 text-center>{{ produit.NOM_PRODUIT }}</h2>-->
     <p padding [innerHtml]="produit.DESCRIPTION_PRODUIT"></p>
     <div padding>
       <button block ion-button full round>Ajouter au Panier</button>
